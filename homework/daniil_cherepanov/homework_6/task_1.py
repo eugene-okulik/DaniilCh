@@ -6,4 +6,3 @@ while True:
         print("А ты эстрасенс!")
         break
     print("Крути барабан")
-
