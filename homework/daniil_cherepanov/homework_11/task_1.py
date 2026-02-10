@@ -15,12 +15,12 @@ class Flower:
 
 class Rose(Flower):
     def __init__(self, color, stem_length, price):
-        super().__init__("Архидея", color, stem_length, price, lifetime=7)
+        super().__init__("Роза", color, stem_length, price, lifetime=7)
 
 
 class Tulip(Flower):
     def __init__(self, color, stem_length, price):
-        super().__init__("Гладиолуз", color, stem_length, price, lifetime=5)
+        super().__init__("Тюльпан", color, stem_length, price, lifetime=5)
 
 
 class Lily(Flower):
@@ -29,8 +29,8 @@ class Lily(Flower):
 
 
 class Bouquet:
-    def __init__(self, flowers):
-        self.flowers = flowers  # список объектов Flower
+    def __init__(self, flowers: list["Flower"]):
+        self.flowers = flowers
 
     def total_price(self):
         return sum(flower.price for flower in self.flowers)
@@ -38,23 +38,14 @@ class Bouquet:
     def average_lifetime(self):
         return sum(flower.lifetime for flower in self.flowers) / len(self.flowers)
 
-    def sort_by_price(self):
-        self.flowers.sort(key=lambda flower: flower.price)
-
-    def sort_by_color(self):
-        self.flowers.sort(key=lambda flower: flower.color)
-
-    def sort_by_stem_length(self):
-        self.flowers.sort(key=lambda flower: flower.stem_length)
-
-    def sort_by_lifetime(self):
-        self.flowers.sort(key=lambda flower: flower.lifetime)
-
     def find_by_lifetime(self, min_lifetime):
         return [
             flower for flower in self.flowers
             if flower.lifetime >= min_lifetime
         ]
+
+    def sort_by(self, key):
+        self.flowers.sort(key=lambda flower: getattr(flower, key))
 
     def show(self):
         for flower in self.flowers:
@@ -75,7 +66,7 @@ print("\nСтоимость букета:", bouquet.total_price())
 print("Среднее время жизни:", bouquet.average_lifetime())
 
 print("\nСортировка по цене:")
-bouquet.sort_by_price()
+bouquet.sort_by("price")
 bouquet.show()
 
 print("\nЦветы с жизнью от 7 дней:")
