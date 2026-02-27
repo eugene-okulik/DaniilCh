@@ -1,4 +1,5 @@
 import mysql.connector as mysql
+
 db = mysql.connect(
     user='st-onl',
     passwd='AVNS_tegPDkI5BlB2lW5eASC',
@@ -19,7 +20,6 @@ try:
     student_id = cursor.lastrowid
     print("Student created:", student_id)
 
-
     # 2 Создайте несколько книг (books) и укажите, что ваш созданный студент взял их
     books = ["418 - я чайник", "JAVA pro"]
     book_ids = []
@@ -34,7 +34,6 @@ try:
 
     print("Books created:", book_ids)
 
-
     # 3 Создайте группу (group)
     cursor.execute("""
         INSERT INTO `groups` (title, start_date, end_date)
@@ -44,7 +43,6 @@ try:
     group_id = cursor.lastrowid
     print("Group created:", group_id)
 
-
     # Определение студента в группу
     cursor.execute("""
         UPDATE students
@@ -53,7 +51,6 @@ try:
     """, (group_id, student_id))
 
     print("Student assigned to group")
-
 
     # 5 Создайте несколько учебных предметов (subjects)
     subjects = ["Тестирование мобильных приложений", "Нагрузочное тестирование"]
@@ -69,7 +66,6 @@ try:
 
     print("Subjects created:", subject_ids)
 
-
     # 6 Создайте по два занятия для каждого предмета (lessons)
     lesson_ids = []
 
@@ -84,7 +80,6 @@ try:
 
     print("Lessons created:", lesson_ids)
 
-
     # 7 Поставьте своему студенту оценки (marks) для всех созданных вами занятий
     for lesson_id in lesson_ids:
         cursor.execute("""
@@ -93,7 +88,6 @@ try:
         """, (student_id, lesson_id, 3))
 
     print("Marks added")
-
 
     db.commit()
 
