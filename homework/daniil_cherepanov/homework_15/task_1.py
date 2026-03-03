@@ -22,17 +22,15 @@ try:
 
     # 2 Создайте несколько книг (books) и укажите, что ваш созданный студент взял их
     books = ["418 - я чайник", "JAVA pro"]
-    book_ids = []
 
-    for book in books:
-        cursor.execute("""
-            INSERT INTO books (title, taken_by_student_id)
-            VALUES (%s, %s)
-        """, (book, student_id))
+    books_data = [(book, student_id) for book in books]
 
-        book_ids.append(cursor.lastrowid)
+    cursor.executemany("""
+        INSERT INTO books (title, taken_by_student_id)
+        VALUES (%s, %s)
+    """, books_data)
 
-    print("Books created:", book_ids)
+    print("Books added")
 
     # 3 Создайте группу (group)
     cursor.execute("""
@@ -81,11 +79,14 @@ try:
     print("Lessons created:", lesson_ids)
 
     # 7 Поставьте своему студенту оценки (marks) для всех созданных вами занятий
-    for lesson_id in lesson_ids:
-        cursor.execute("""
-            INSERT INTO marks (student_id, lesson_id, value)
-            VALUES (%s, %s, %s)
-        """, (student_id, lesson_id, 3))
+    marks_data = [(student_id, lesson_id, 3) for lesson_id in lesson_ids]
+
+    cursor.executemany("""
+        INSERT INTO marks (student_id, lesson_id, value)
+        VALUES (%s, %s, %s)
+    """, marks_data)
+
+    print("Marks added")
 
     print("Marks added")
 
