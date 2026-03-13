@@ -17,7 +17,7 @@ db = mysql.connect(
 
 cursor = db.cursor()
 
-file_path = Path(r"C:\Projects\DaniilCh-New\homework\eugene_okulik\Lesson_16\hw_data\data.csv")
+file_path = Path(__file__).parents[2] / "eugene_okulik" / "Lesson_16" / "hw_data" / "data.csv"
 
 with file_path.open(newline='', encoding='utf-8') as file:
     reader = csv.DictReader(file, fieldnames=[
