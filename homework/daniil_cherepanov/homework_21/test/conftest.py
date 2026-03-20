@@ -4,6 +4,7 @@ import allure
 
 BASE_URL = "http://objapi.course.qa-practice.com/object"
 
+
 def pytest_sessionstart(session):
     with allure.step("=== Start testing session ==="):
         print("\n=== Start testing ===")
@@ -13,6 +14,7 @@ def pytest_sessionfinish(session, exitstatus):
     with allure.step("=== Testing session finished ==="):
         print("\n=== Testing completed ===")
 
+
 @pytest.fixture(autouse=True)
 def around_each_test():
     with allure.step("=== Before test ==="):
@@ -20,6 +22,7 @@ def around_each_test():
     yield
     with allure.step("=== After test ==="):
         print("\n--- after test ---")
+
 
 @pytest.fixture
 def created_object_id():

@@ -4,6 +4,7 @@ import allure
 
 BASE_URL = "http://objapi.course.qa-practice.com/object"
 
+
 @allure.feature("Objects API")
 @allure.story("Create object")
 @allure.title("Создание объекта с разными параметрами")
@@ -53,6 +54,7 @@ def test_get_object(created_object_id):
         assert response.status_code == 200
         assert response.json()["id"] == created_object_id
 
+
 @allure.story("Update object (PUT)")
 @allure.title("Полное обновление объекта")
 def test_put_object(created_object_id):
@@ -75,6 +77,7 @@ def test_put_object(created_object_id):
         assert data["name"] == "updated_object"
         assert data["data"]["year"] == 2030
         assert data["data"]["price"] == 999
+
 
 @allure.story("Partial update (PATCH)")
 @allure.title("Частичное обновление объекта")
