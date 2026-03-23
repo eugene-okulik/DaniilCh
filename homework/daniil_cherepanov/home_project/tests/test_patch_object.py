@@ -11,4 +11,3 @@ def test_patch_object(new_object_id):
 
     api.should_have_status(200)
     api.should_have_field(["data", "price"], 555)
-

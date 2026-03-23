@@ -3,6 +3,7 @@ import allure
 
 from fixtures.object_fixtures import *
 
+
 def pytest_sessionstart(session):
     with allure.step("=== START TEST SESSION ==="):
         print("\n=== START TESTING ===")
