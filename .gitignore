@@ -8,3 +8,5 @@ credentials.py
 .env
 .venv
 .env
+.allure-results
+/allure-results/
