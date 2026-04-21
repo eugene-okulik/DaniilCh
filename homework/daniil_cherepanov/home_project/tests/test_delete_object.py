@@ -1,15 +1,12 @@
 import allure
-from endpoints.create_object import CreateObject
-from endpoints.delete_object import DeleteObject
 
 
 @allure.title("Удаление объекта")
-def test_delete_object():
-    body = {"name": "to_delete", "data": {"year": 2000}}
+def test_delete_object(delete_object_endpoint, created_object_id):
+    delete_object_endpoint.delete_object(created_object_id)
 
-    creator = CreateObject().create_object(body)
-    obj_id = creator.response_json["id"]
-
-    api = DeleteObject()
-    api.delete_object(obj_id)
-    api.should_have_status(200)
+    delete_object_endpoint.check_status_code(200)
+    delete_object_endpoint.check_response_field(
+        ["message"],
+        f"Object with id = {created_object_id} has been deleted."
+    )

@@ -1,13 +1,9 @@
 import allure
-from endpoints.patch_object import PatchObject
 
 
 @allure.title("Частичное обновление объекта")
-def test_patch_object(new_object_id):
-    body = {"data": {"price": 555}}
+def test_patch_object(patch_object_endpoint, created_object_id, patch_object_body):
+    patch_object_endpoint.patch_object(created_object_id, patch_object_body)
 
-    api = PatchObject()
-    api.patch_object(new_object_id, body)
-
-    api.should_have_status(200)
-    api.should_have_field(["data", "price"], 555)
+    patch_object_endpoint.check_status_code(200)
+    patch_object_endpoint.check_response_field(["name"], "updated_test_object")

@@ -1,12 +1,13 @@
 import allure
-import requests
+
 from endpoints.base_endpoint import BaseEndpoint
 
 
 class GetObject(BaseEndpoint):
 
-    def get_object(self, obj_id):
-        with allure.step("Получение объекта (GET)"):
-            self.response = requests.get(f"{self.BASE_URL}/{obj_id}")
-            self.response_json = self.response.json()
-        return self
+    @allure.step("Получение объекта по id")
+    def get_object(self, object_id):
+        self._make_request(
+            method="GET",
+            url=f"{self.base_url}/{object_id}"
+        )
