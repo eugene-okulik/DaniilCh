@@ -1,9 +1,11 @@
 import allure
 
+from fixtures.object_fixtures import CREATE_OBJECT_BODY
+
 
 @allure.title("Создание объекта")
-def test_create_object(create_object_endpoint, create_object_body):
-    create_object_endpoint.create_object(create_object_body)
+def test_create_object(create_object_endpoint):
+    create_object_endpoint.create_object(CREATE_OBJECT_BODY)
 
     create_object_endpoint.check_status_code(200)
     create_object_endpoint.check_response_field(["name"], "test_object")

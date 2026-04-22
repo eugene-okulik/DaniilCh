@@ -1,30 +1,19 @@
-import pytest
-
-
-@pytest.fixture
-def create_object_body():
-    return {
-        "name": "test_object",
-        "data": {
-            "year": 2025,
-            "price": 500
-        }
+CREATE_OBJECT_BODY = {
+    "name": "test_object",
+    "data": {
+        "year": 2025,
+        "price": 500
     }
+}
 
+PATCH_OBJECT_BODY = {
+    "name": "updated_test_object"
+}
 
-@pytest.fixture
-def patch_object_body():
-    return {
-        "name": "updated_test_object"
+PUT_OBJECT_BODY = {
+    "name": "replaced_test_object",
+    "data": {
+        "year": 2026,
+        "price": 700
     }
-
-
-@pytest.fixture
-def put_object_body():
-    return {
-        "name": "replaced_test_object",
-        "data": {
-            "year": 2026,
-            "price": 700
-        }
-    }
+}

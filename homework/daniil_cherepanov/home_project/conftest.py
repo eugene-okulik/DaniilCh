@@ -5,11 +5,7 @@ from endpoints.delete_object import DeleteObject
 from endpoints.get_object import GetObject
 from endpoints.patch_object import PatchObject
 from endpoints.put_object import PutObject
-
-
-pytest_plugins = [
-    "fixtures.object_fixtures"
-]
+from fixtures.object_fixtures import CREATE_OBJECT_BODY
 
 
 @pytest.fixture
@@ -38,8 +34,13 @@ def put_object_endpoint():
 
 
 @pytest.fixture
-def created_object_id(create_object_endpoint, create_object_body):
-    create_object_endpoint.create_object(create_object_body)
+def created_object_id(create_object_endpoint, delete_object_endpoint):
+    create_object_endpoint.create_object(CREATE_OBJECT_BODY)
     create_object_endpoint.check_status_code(200)
     create_object_endpoint.check_field_exists("id")
-    return create_object_endpoint.response_json["id"]
+
+    obj_id = create_object_endpoint.response_json["id"]
+
+    yield obj_id
+
+    delete_object_endpoint.delete_object(obj_id)
